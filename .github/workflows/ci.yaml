@@ -23,6 +23,7 @@ jobs:
       - name: Install kyverno
         run: |
           kubectl apply --wait -k kyverno-install
+          sleep 2
           kubectl wait --for=condition=available --timeout=600s -n kyverno deployment/kyverno
 
       - name: Test
