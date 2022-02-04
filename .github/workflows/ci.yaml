@@ -29,9 +29,11 @@ jobs:
         # if: matrix.env == 'dev'
         run: |
           kubectl apply -k "github.com/example-policy-org/policy/kubernetes/kyverno?ref=1.0.0"
-          kubectl apply -k "github.com/example-policy-org/policy/kubernetes/kyverno?ref=1.1.0"
+          kubectl apply -k "github.com/example-policy-org/policy/kubernetes/kyverno?ref=2.0.0"
+          kubectl apply -k "github.com/example-policy-org/policy/kubernetes/kyverno?ref=2.0.1"
           while [[ $(kubectl get -k "github.com/example-policy-org/policy/kubernetes/kyverno?ref=1.0.0" -o 'jsonpath={..status.ready}') != "true" ]]; do sleep 1; done
-          while [[ $(kubectl get -k "github.com/example-policy-org/policy/kubernetes/kyverno?ref=1.1.0" -o 'jsonpath={..status.ready}') != "true true" ]]; do sleep 1; done
+          while [[ $(kubectl get -k "github.com/example-policy-org/policy/kubernetes/kyverno?ref=2.0.0" -o 'jsonpath={..status.ready}') != "true true" ]]; do sleep 1; done
+          while [[ $(kubectl get -k "github.com/example-policy-org/policy/kubernetes/kyverno?ref=2.0.1" -o 'jsonpath={..status.ready}') != "true true" ]]; do sleep 1; done
 
           kubectl apply -k github.com/example-policy-org/app1
           kubectl apply -k github.com/example-policy-org/app2
