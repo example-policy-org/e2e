@@ -18,12 +18,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2.4.0
 
-      - uses: engineerd/setup-kind@v0.5.0
-
+      - uses: container-tools/kind-action@fdfd7e7ffb39e532f9de844dba8f1a29ae7e0f75 # renovate: tag=v1.7.0
+        timeout-minutes: 5
+        with: 
+          kubectl_version: v1.22.2
+          registry: false
+          
       - name: Install kyverno
         run: |
           kubectl apply --wait -k kyverno-install
-          sleep 2
+          sleep 5
           kubectl wait --for=condition=available --timeout=600s -n kyverno deployment/kyverno
 
       - name: Test
